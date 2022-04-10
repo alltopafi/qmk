@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdint.h>
+#include <stdio.h>
+
 #include <stdbool.h>
 #if defined(__AVR__)
 #include <avr/io.h>
@@ -132,6 +134,7 @@ uint8_t matrix_cols(void) {
 
 void matrix_init(void) {
     // initialize row and col
+    print("test");
 #if (DIODE_DIRECTION == COL2ROW)
     unselect_rows();
     init_cols();
@@ -379,6 +382,9 @@ static void unselect_cols(void)
 
     for(uint8_t col = 0; col < MATRIX_COLS; col++) {
         uint8_t pin = col_pins[col];
+        char str[24] = "";
+        sprintf(str, "col expanded:%5lc/sec", col_expanded[col]);
+
         if (!col_expanded[col])
         {
             _SFR_IO8((pin >> 4) + 1) &= ~_BV(pin & 0xF); // IN

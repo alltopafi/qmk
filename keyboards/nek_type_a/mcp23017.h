@@ -52,7 +52,7 @@ enum EXPANDER_REGISTERS {
 #define GPA4 0x4
 #define GPA5 0x5
 #define GPA6 0x6
-#define GPA7 0x7
+#define GPA7 0x7 //8
 #define GPB0 0x8
 #define GPB1 0x9
 #define GPB2 0xA

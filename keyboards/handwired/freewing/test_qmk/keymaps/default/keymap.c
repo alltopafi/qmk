@@ -5,25 +5,13 @@
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _BASE,
-    _FN1,
-    _FN2,
-    _FN3
+    _BASE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT(
-        AU_ON, KC_2,    KC_1,  MO(_FN1)
-    ),
-    [_FN1] = LAYOUT(
-        AU_OFF, RESET,  RESET, _______
-    ),
-    [_FN2] = LAYOUT(
-        AU_OFF, RESET,  RESET, _______
-    ),
-    [_FN3] = LAYOUT(
-        AU_OFF, RESET,  RESET, _______
+        KC_2
     )
 };
 
@@ -179,16 +167,7 @@ bool oled_task_user(void) {
 
     switch (get_highest_layer(layer_state)) {
         case _BASE:
-            oled_write_P(PSTR("Default\n"), false);
-            break;
-        case _FN1:
-            oled_write_P(PSTR("FN1\n"), false);
-            break;
-        case _FN2:
-            oled_write_P(PSTR("FN2\n"), false);
-            break;
-        case _FN3:
-            oled_write_P(PSTR("FN3\n"), false);
+            oled_write_P(PSTR("Batman\n"), false);
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string

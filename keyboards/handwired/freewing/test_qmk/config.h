@@ -9,12 +9,12 @@
 #define VENDOR_ID    0xFEED
 #define PRODUCT_ID   0x7E57
 #define DEVICE_VER   0x0001
-#define MANUFACTURER FREEWING-JP
-#define PRODUCT      test_qmk
+#define MANUFACTURER alltopafi
+#define PRODUCT      alltopafi-keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 1
-#define MATRIX_COLS 4
+#define MATRIX_COLS 1
 
 /*
  * Keyboard Matrix Assignments
@@ -27,7 +27,7 @@
  *
  */
 #define MATRIX_ROW_PINS { B1 }
-#define MATRIX_COL_PINS { F7, F6, F5, F4 }
+#define MATRIX_COL_PINS { D7 }
 #define UNUSED_PINS
 
 /* COL2ROW, ROW2COL */

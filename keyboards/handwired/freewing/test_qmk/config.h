@@ -13,8 +13,11 @@
 #define PRODUCT      alltopafi-keyboard
 
 /* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 1
+#define MATRIX_ROWS 2
+#define MATRIX_COLS 2
+
+#define MATRIX_ROWS_PER_SIDE (MATRIX_ROWS / 2)
+#define MATRIX_COLS_PER_SIDE (MATRIX_COLS / 2)
 
 /*
  * Keyboard Matrix Assignments
@@ -26,9 +29,40 @@
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
-#define MATRIX_ROW_PINS { B1 }
-#define MATRIX_COL_PINS { D7 }
-#define UNUSED_PINS
+// #define MATRIX_ROW_PINS { B1 }
+// #define MATRIX_COL_PINS { D7 }
+// #define UNUSED_PINS
+
+//MCU B1, D7
+//IO B0, A7
+#define MATRIX_ROW_PINS_MCU \
+    { B1 }
+#define MATRIX_COL_PINS_MCU \
+    { D7 }
+#define UNUSED_PINS_MCU \
+    { B0, B7, A0, C6, C7, D2, D3, D4, D5, E6, F1, F4, F5, F6, F7, A7 }
+#define MATRIX_ROW_PINS_MCP \
+    { A6 }
+#define MATRIX_COL_PINS_MCP \
+    { A5 }
+#define UNUSED_PINS_MCP \
+    { B1, D7 }
+
+/* ----
+// #define MATRIX_ROW_PINS_MCU \
+//     { B3, B2, B1, F0 }
+// #define MATRIX_COL_PINS_MCU \
+//     { D6, D7, B4, B5, B6 }
+// #define UNUSED_PINS_MCU \
+//     { B0, B7, C6, C7, D2, D3, D4, D5, E6, F1, F4, F5, F6, F7 }
+// #define MATRIX_ROW_PINS_MCP \
+//     { B0, B1, B2, B3 }
+// #define MATRIX_COL_PINS_MCP \
+//     { A0, A1, A2, A3, A4 }
+// #define UNUSED_PINS_MCP \
+//     { B4, B5, B6, B7, A5, A6, A7 }
+// ----
+*/
 
 /* COL2ROW, ROW2COL */
 // COL2ROW = Set row, Read cols
@@ -168,4 +202,4 @@
   #define OLED_TIMEOUT 31000
 #endif
 
-#define DEBUG_MATRIX_SCAN_RATE
+// #define DEBUG_MATRIX_SCAN_RATE

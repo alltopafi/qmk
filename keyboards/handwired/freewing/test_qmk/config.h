@@ -44,7 +44,7 @@
 #define MATRIX_ROW_PINS_MCP \
     { B0 }
 #define MATRIX_COL_PINS_MCP \
-    { A1 }
+    { A0 }
 #define UNUSED_PINS_MCP \
     { B1, B2, B3, B4, B5, B6, B7, A2, A3, A4, A5, A6, A7 }
 

@@ -264,7 +264,7 @@ static void select_row(uint8_t row) {
             uint8_t buf[]   = {GPIOB, 0xFF & ~(1 << (row - MATRIX_ROWS_PER_SIDE))};
             mcp23017_status = i2c_transmit(I2C_ADDR_WRITE, buf, sizeof(buf), I2C_TIMEOUT);
 
-            // uprintf("row: %d\nMatrix rows per side%d\n", row , MATRIX_ROWS_PER_SIDE);
+            // uprintf("row: %d\nMatrix rows per side%d\nbuf: %d", row , MATRIX_ROWS_PER_SIDE, buf);
         }
     }
 }

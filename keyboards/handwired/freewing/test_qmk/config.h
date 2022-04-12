@@ -42,11 +42,11 @@
 #define UNUSED_PINS_MCU \
     { D3, D2, D1, D0, D4, C6, E6, B4, B5, B0, F4, F5, F6, F7, B3, B2, B6 }
 #define MATRIX_ROW_PINS_MCP \
-    { A7 }
-#define MATRIX_COL_PINS_MCP \
     { B0 }
+#define MATRIX_COL_PINS_MCP \
+    { A1 }
 #define UNUSED_PINS_MCP \
-    { B1, B2, B3, B4, B5, B6, B7, A0, A1, A2, A3, A4, A5, A6 }
+    { B1, B2, B3, B4, B5, B6, B7, A2, A3, A4, A5, A6, A7 }
 
 /* ----
 // #define MATRIX_ROW_PINS_MCU \

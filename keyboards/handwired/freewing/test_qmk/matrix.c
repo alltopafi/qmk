@@ -63,7 +63,6 @@ uint8_t init_mcp23017(void) {
 
     // I2C subsystem
     if (i2c_initialized == 0) {
-        print("i2c init = 0\n");
         i2c_init();  // on pins D(1,0)
         i2c_initialized = true;
         wait_ms(I2C_TIMEOUT);
@@ -102,20 +101,23 @@ static uint8_t mcp23017_reset_loop;
 
 void matrix_init_custom(void) {
     // initialize row and col
-    print("start matrix init custom\n");
+    print("calling matrix init custom\n");
     mcp23017_status = init_mcp23017();
 
     unselect_rows();
     init_cols();
+    // print("post init cols call\n");
 
     // initialize matrix state: all keys off
     for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
         matrix[i] = 0;
+        uprintf("init matrix for row %d\n", i);
+
     }
 }
 
 void matrix_power_up(void) {
-    print("matrix power up\n");
+    print("calling matrix power up\n");
     mcp23017_status = init_mcp23017();
 
     unselect_rows();
@@ -130,8 +132,10 @@ void matrix_power_up(void) {
 // Reads and stores a row, returning
 // whether a change occurred.
 static inline bool store_matrix_row(matrix_row_t current_matrix[], uint8_t index) {
+    // print("calling store_matrix_row\n");
     matrix_row_t temp = read_cols(index);
     if (current_matrix[index] != temp) {
+        uprintf("temp value is: %d and current value is: %d\n", temp, current_matrix[index]);
         current_matrix[index] = temp;
         return true;
     }
@@ -140,7 +144,6 @@ static inline bool store_matrix_row(matrix_row_t current_matrix[], uint8_t index
 
 bool matrix_scan_custom(matrix_row_t current_matrix[]) {
     if (mcp23017_status) {  // if there was an error
-        print("Error with io expander scan\n");
         if (++mcp23017_reset_loop == 0) {
             // if (++mcp23017_reset_loop >= 1300) {
             // since mcp23017_reset_loop is 8 bit - we'll try to reset once in 255 matrix scans
@@ -160,6 +163,8 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
         // select rows from left and right hands
         uint8_t left_index  = i;
         uint8_t right_index = i + MATRIX_ROWS_PER_SIDE;
+        // uprintf("index for left side select row %d\n", left_index);
+        // uprintf("index for right side select row %d\n", right_index);
         select_row(left_index);
         select_row(right_index);
 
@@ -168,6 +173,7 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
 
         changed |= store_matrix_row(current_matrix, left_index);
         changed |= store_matrix_row(current_matrix, right_index);
+        // uprintf("has something changed: %b\n", changed);
 
         unselect_rows();
     }
@@ -178,11 +184,12 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
 static void init_cols(void) {
     // init on mcp23017
     // not needed, already done as part of init_mcp23017()
+    // print("calling init_cols\n");
 
     // init on mcu
-    print("init cols\n");
     pin_t matrix_col_pins_mcu[MATRIX_COLS_PER_SIDE] = MATRIX_COL_PINS_MCU;
     for (int pin_index = 0; pin_index < MATRIX_COLS_PER_SIDE; pin_index++) {
+        uprintf("calling init cols for pin index: %d\n", pin_index);
         pin_t pin = matrix_col_pins_mcu[pin_index];
         setPinInput(pin);
         writePinHigh(pin);
@@ -204,7 +211,6 @@ static matrix_row_t read_cols(uint8_t row) {
         return current_row_value;
     } else {
         if (mcp23017_status) {  // if there was an error
-            print("error with io expander\n");
             return 0;
         } else {
             uint8_t buf[]   = {GPIOA};
@@ -216,8 +222,7 @@ static matrix_row_t read_cols(uint8_t row) {
             uint8_t data[] = {0};
             if (!mcp23017_status) {
                 mcp23017_status = i2c_receive(I2C_ADDR_READ, data, sizeof(data), I2C_TIMEOUT);
-                // uprintf("status is %d\n", "mcp23017_status");
-                data[0] = ~(data[0]);
+                data[0]         = ~(data[0]);
             }
             return data[0];
         }
@@ -228,9 +233,9 @@ static void unselect_rows(void) {
     // no need to unselect on mcp23017, because the select step sets all
     // the other row bits high, and it's not changing to a different
     // direction
+    // print("calling unselect_rows\n");
 
     // unselect rows on microcontroller
-    // print("unselect_rows called\n");
     pin_t matrix_row_pins_mcu[MATRIX_ROWS_PER_SIDE] = MATRIX_ROW_PINS_MCU;
     for (int pin_index = 0; pin_index < MATRIX_ROWS_PER_SIDE; pin_index++) {
         pin_t pin = matrix_row_pins_mcu[pin_index];
@@ -240,7 +245,8 @@ static void unselect_rows(void) {
 }
 
 static void select_row(uint8_t row) {
-    // print("select row called\n");
+        // print("calling select_row\n");
+
     if (row < MATRIX_ROWS_PER_SIDE) {
         // select on atmega32u4
         pin_t matrix_row_pins_mcu[MATRIX_ROWS_PER_SIDE] = MATRIX_ROW_PINS_MCU;
@@ -251,12 +257,14 @@ static void select_row(uint8_t row) {
         // select on mcp23017
         if (mcp23017_status) {  // if there was an error
                                 // do nothing
-            print("Error during select row\n");
+            print("error during select_row\n");
         } else {
             // Select the desired row by writing a byte for the entire GPIOB bus where only the bit representing the row we want to select is a zero (write instruction) and every other bit is a one.
             // Note that the row - MATRIX_ROWS_PER_SIDE reflects the fact that being on the right hand, the columns are numbered from MATRIX_ROWS_PER_SIDE to MATRIX_ROWS, but the pins we want to write to are indexed from zero up on the GPIOB bus.
             uint8_t buf[]   = {GPIOB, 0xFF & ~(1 << (row - MATRIX_ROWS_PER_SIDE))};
             mcp23017_status = i2c_transmit(I2C_ADDR_WRITE, buf, sizeof(buf), I2C_TIMEOUT);
+
+            // uprintf("row: %d\nMatrix rows per side%d\n", row , MATRIX_ROWS_PER_SIDE);
         }
     }
 }

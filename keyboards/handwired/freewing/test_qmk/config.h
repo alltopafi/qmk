@@ -46,7 +46,11 @@
 #define MATRIX_COL_PINS_MCP \
     { A0, A1 }
 #define UNUSED_PINS_MCP \
-    { B1, B2, B3, B4, B5, B6, B7, A2, A3, A4, A5, A6, A7 }
+    { B1, B2, B3, B4, B5, B6, B7, A2, A3, A6, A7 }
+
+#define ENCODERS_PAD_A { B5 }
+#define ENCODERS_PAD_B { B4 }
+
 
 /* ----
 // #define MATRIX_ROW_PINS_MCU \

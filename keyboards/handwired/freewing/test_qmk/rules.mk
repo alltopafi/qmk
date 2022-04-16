@@ -22,8 +22,9 @@ AUDIO_ENABLE = no          # Audio output
 
 # JOYSTICK_ENABLE = yes       # Joystick Game controller HID Interface
 # JOYSTICK_DRIVER = analog    # Stick mode analog or digital
-POINTING_DEVICE_ENABLE = no # Generic Pointer
-# SRC += analog.c
+POINTING_DEVICE_ENABLE = yes # Generic Pointer
+SRC += analog.c
+POINTING_DEVICE_DRIVER = custom
 
 OLED_ENABLE = yes           # Display Feature
 OLED_DRIVER = SSD1306       # OLED SSD1306 128x32

@@ -8,8 +8,8 @@
 #include "analog.h"
 
 void joystick_task(){
-    joystick_status.axes[0] = analogReadPin(B4)/4 - 128;
-    joystick_status.axes[1] = analogReadPin(B5)/4 - 128;
+    joystick_status.axes[0] = analogReadPin(F4))/4 - 128;
+    joystick_status.axes[1] = analogReadPin(B6)/4 - 128;
     joystick_status.status |= JS_UPDATED;
     send_joystick_packet(&joystick_status);
 }

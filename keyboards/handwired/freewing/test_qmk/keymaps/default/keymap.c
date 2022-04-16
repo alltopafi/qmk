@@ -30,7 +30,7 @@ uint8_t maxCursorSpeed = 2;
 uint8_t precisionSpeed = 1;
 uint8_t speedRegulator = 24;  // Lower Values Create Faster Movement
 
-int8_t xPolarity = -1;
+int8_t xPolarity = 1;
 int8_t yPolarity = -1;
 
 uint8_t cursorTimeout = 10;
@@ -87,8 +87,8 @@ void pointing_device_init(void) {
     // init pin? Is needed?
     // setPinInputHigh(E6);
     // Account for drift
-    xOrigin = analogReadPin(B4);
-    yOrigin = analogReadPin(B5);
+    xOrigin = analogReadPin(F4);
+    yOrigin = analogReadPin(B6);
 }
 
 void pointing_device_task(void) {
@@ -97,8 +97,8 @@ void pointing_device_task(void) {
     // todo read as one vector
     if (timer_elapsed(lastCursor) > cursorTimeout) {
         lastCursor = timer_read();
-        report.x   = axisToMouseComponent(B4, xOrigin, maxCursorSpeed, xPolarity);
-        report.y   = axisToMouseComponent(B5, yOrigin, maxCursorSpeed, yPolarity);
+        report.x   = axisToMouseComponent(F4, xOrigin, maxCursorSpeed, xPolarity);
+        report.y   = axisToMouseComponent(B6, yOrigin, maxCursorSpeed, yPolarity);
     }
 
     //
@@ -195,13 +195,13 @@ bool oled_task_user(void) {
 }
 #endif
 
-void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  debug_matrix=true;
-//   debug_keyboard=true;
-  //debug_mouse=true;
-}
+// void keyboard_post_init_user(void) {
+//   // Customise these values to desired behaviour
+//   debug_enable=true;
+//   debug_matrix=true;
+// //   debug_keyboard=true;
+//   //debug_mouse=true;
+// }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { /* First encoder */

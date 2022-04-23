@@ -13,8 +13,8 @@
 #define PRODUCT      alltopafi-keyboard
 
 /* key matrix size */
-#define MATRIX_ROWS 4
-#define MATRIX_COLS 6
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 14
 
 #define MATRIX_ROWS_PER_SIDE (MATRIX_ROWS / 2)
 #define MATRIX_COLS_PER_SIDE (MATRIX_COLS / 2)
@@ -36,11 +36,11 @@
 //MCU B1, D7
 //IO B0, A7
 #define MATRIX_ROW_PINS_MCU \
-    { F6, F7 }
+    { B3, F4, F5, F6, F7 }
 #define MATRIX_COL_PINS_MCU \
-    { C6, D7, E6 }
+    { D3, D2, D4, C6, D7, E6, B2 }
 #define UNUSED_PINS_MCU \
-    { D3, D2, D1, D0, D4, B1, B4, B5, B0, F4, F5, B3, B2, B6 }
+    { D1, D0, D4, B4, B5, B0, F4, B3, B2, B6 }
 #define MATRIX_ROW_PINS_MCP \
     { B0 }
 #define MATRIX_COL_PINS_MCP \
@@ -109,6 +109,8 @@
 /* disable these deprecated features by default */
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 2
 
 /* Bootmagic Lite key configuration */
 //#define BOOTMAGIC_LITE_ROW 0

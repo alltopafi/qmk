@@ -27,68 +27,34 @@
  * ROWS: AVR pins used for rows, top to bottom
  * DIODE_DIRECTION: COL2ROW = COL = Anode (+), ROW = Cathode (-, marked on diode)
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
- *
  */
-// #define MATRIX_ROW_PINS { B1 }
-// #define MATRIX_COL_PINS { D7 }
-// #define UNUSED_PINS
 
 //MCU B1, D7
 //IO B0, A7
 #define MATRIX_ROW_PINS_MCU \
-    { B3, F4, F5, F6, F7 }
+    { F4, F5, F6, F7, B1 }
 #define MATRIX_COL_PINS_MCU \
-    { D3, D2, D4, C6, D7, E6, B2 }
+    { D3, D2, D4, C6, D7, E6, B4 }
 #define UNUSED_PINS_MCU \
-    { D1, D0, D4, B4, B5, B0, F4, B3, B2, B6 }
-#define MATRIX_ROW_PINS_MCP \
-    { B0 }
+    {  }
+ #define MATRIX_ROW_PINS_MCP \
+    { B0, B1, B2, B3, B4 }
 #define MATRIX_COL_PINS_MCP \
-    { A0, A1 }
+    { A0, A1, A2, A3, A4, A5, A6 }
 #define UNUSED_PINS_MCP \
-    { B1, B2, B3, B4, B5, B6, B7, A2, A3, A6, A7 }
+     {  }
 
-#define ENCODERS_PAD_A { B5 }
-#define ENCODERS_PAD_B { B4 }
+#define ENCODERS_PAD_A { B6 }
+#define ENCODERS_PAD_B { B2 }
 
-/* ----
-// #define MATRIX_ROW_PINS_MCU \
-//     { B3, B2, B1, F0 }
-// #define MATRIX_COL_PINS_MCU \
-//     { D6, D7, B4, B5, B6 }
-// #define UNUSED_PINS_MCU \
-//     { B0, B7, C6, C7, D2, D3, D4, D5, E6, F1, F4, F5, F6, F7 }
-// #define MATRIX_ROW_PINS_MCP \
-//     { B0, B1, B2, B3 }
-// #define MATRIX_COL_PINS_MCP \
-//     { A0, A1, A2, A3, A4 }
-// #define UNUSED_PINS_MCP \
-//     { B4, B5, B6, B7, A5, A6, A7 }
-// ----
-*/
 
-/* COL2ROW, ROW2COL */
+
+
 // COL2ROW = Set row, Read cols
 #define DIODE_DIRECTION COL2ROW
 
-/*
- * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
- */
-//#define SOFT_SERIAL_PIN D0  // or D1, D2, D3, E6
-
-// The state of the indicator pins when the LED is "on" - 1 for high
-#define LED_PIN_ON_STATE 0
-
-//#define LED_NUM_LOCK_PIN B0
-#define LED_CAPS_LOCK_PIN D5   // TX LED
-#define LED_SCROLL_LOCK_PIN B0 // RX LED
-//#define LED_COMPOSE_PIN B3
-//#define LED_KANA_PIN B4
-
-
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
-
 
 /*
  * Feature disable options
@@ -96,10 +62,10 @@
  */
 
 /* disable debug print */
-#define NO_DEBUG
+// #define NO_DEBUG
 
 /* disable print */
-#define NO_PRINT
+// #define NO_PRINT
 
 /* disable action features */
 // #define NO_ACTION_LAYER

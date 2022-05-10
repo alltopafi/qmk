@@ -20,11 +20,15 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no          # Audio output
 
-# JOYSTICK_ENABLE = yes       # Joystick Game controller HID Interface
-# JOYSTICK_DRIVER = analog    # Stick mode analog or digital
-POINTING_DEVICE_ENABLE = yes # Generic Pointer
+JOYSTICK_ENABLE = no       # Joystick Game controller HID Interface
+JOYSTICK_DRIVER = analog    # Stick mode analog or digital
+
+POINTING_DEVICE_ENABLE = no # Generic Pointer
 SRC += analog.c
 POINTING_DEVICE_DRIVER = custom
+# POINTING_DEVICE_DRIVER = analog_joystick
+
+
 
 OLED_ENABLE = yes           # Display Feature
 OLED_DRIVER = SSD1306       # OLED SSD1306 128x32
@@ -46,7 +50,7 @@ QUANTUM_LIB_SRC += i2c_master.c
 
 ENCODER_ENABLE = yes
 
-QMK_SETTINGS = no
+QMK_SETTINGS = yes
 TAP_DANCE_ENABLE = no
 COMBO_ENABLE = no
 KEY_OVERRIDE_ENABLE = no

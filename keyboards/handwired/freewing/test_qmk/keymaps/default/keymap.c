@@ -4,125 +4,141 @@
 #include QMK_KEYBOARD_H
 // #include "print.h"
 
+#define KC_MAC_COPY LGUI(KC_C)
+#define KC_MAC_PASTE LGUI(KC_V)
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _BASE
+    _BASE,
+    _SECONDARY
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
-    [_BASE] = LAYOUT(
+    [_BASE] = LAYOUT( //TODO how do we allow the left side to work without the right side???
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_0    ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5     ,                                             KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_1 ,
+     KC_ESC  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                             KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_4    ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,KC_6   ,                           KC_2    ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_EQL  ,
+     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,KC_LBRC ,                           KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_2    ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_7    ,                          KC_RBRC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOTE ,
+     KC_CAPS ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_MAC_PASTE  ,                          KC_2 ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,KC_2 ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_3    ,KC_4    ,        KC_HOME ,KC_3    ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
-  //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_1    ,KC_2    ,KC_3    ,KC_4    ,     KC_4    ,    KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,    KC_RALT ,     KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+     KC_LSFT    ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_DEL ,KC_MUTE ,        KC_2 ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,KC_2  ,KC_2 ,KC_2 ,
+  //├────────┼────────┼──────56──┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
+     TG(1) ,KC_MAC_COPY  ,KC_LCTL ,KC_LALT      ,KC_LGUI     ,KC_SPC ,KC_BSPC  ,        KC_2  ,KC_2  ,    KC_2 ,     KC_2 ,KC_2 ,KC_2   ,KC_2
+  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
+  ),
+  [_SECONDARY] = LAYOUT( //TODO how do we allow the left side to work without the right side???
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     KC_GRAVE,KC_F1    ,KC_F2    ,KC_F3    ,KC_F4    ,KC_F5    ,                                             KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO    ,KC_NO  ,                           KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2  ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   , KC_NO  ,                          KC_2 ,KC_2    ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,KC_2 ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,QK_BOOT ,        KC_2 ,KC_2    ,KC_2    ,KC_2    ,KC_2 ,KC_2  ,KC_2 ,KC_2 ,
+  //├────────┼────────┼──────56──┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
+     TG(1)   ,_______ ,_______ ,_______     ,_______      ,KC_NO   ,KC_NO   ,        KC_2  ,KC_2  ,    KC_2 ,     KC_2 ,KC_2 ,KC_2   ,KC_2
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   )
 };
 
-#ifdef POINTING_DEVICE_ENABLE
-#include "analog.h"
-#include "pointing_device.h"
+// #ifdef POINTING_DEVICE_ENABLE
+// #include "analog.h"
+// #include "pointing_device.h"
 
-// Set Parameters
-uint16_t minAxisValue = 200;
-uint16_t maxAxisValue = 820;
+// // Set Parameters
+// uint16_t minAxisValue = 200;
+// uint16_t maxAxisValue = 820;
 
-uint8_t maxCursorSpeed = 2;
-uint8_t precisionSpeed = 1;
-uint8_t speedRegulator = 24;  // Lower Values Create Faster Movement
+// uint8_t maxCursorSpeed = 2;
+// uint8_t precisionSpeed = 1;
+// uint8_t speedRegulator = 24;  // Lower Values Create Faster Movement
 
-int8_t xPolarity = 1;
-int8_t yPolarity = -1;
+// int8_t xPolarity = 1;
+// int8_t yPolarity = -1;
 
-uint8_t cursorTimeout = 10;
+// uint8_t cursorTimeout = 10;
 
-int16_t xOrigin, yOrigin;
+// int16_t xOrigin, yOrigin;
 
-uint16_t lastCursor = 0;
+// uint16_t lastCursor = 0;
 
-int16_t axisCoordinate(uint8_t pin, uint16_t origin) {
-    int8_t  direction;
-    int16_t distanceFromOrigin;
-    int16_t range;
+// int16_t axisCoordinate(uint8_t pin, uint16_t origin) {
+//     int8_t  direction;
+//     int16_t distanceFromOrigin;
+//     int16_t range;
 
-    int16_t position = analogReadPin(pin);
+//     int16_t position = analogReadPin(pin);
 
-    if (origin == position) {
-        return 0;
-    } else if (origin > position) {
-        distanceFromOrigin = origin - position;
-        range              = origin - minAxisValue;
-        direction          = -1;
-    } else {
-        distanceFromOrigin = position - origin;
-        range              = maxAxisValue - origin;
-        direction          = 1;
-    }
+//     if (origin == position) {
+//         return 0;
+//     } else if (origin > position) {
+//         distanceFromOrigin = origin - position;
+//         range              = origin - minAxisValue;
+//         direction          = -1;
+//     } else {
+//         distanceFromOrigin = position - origin;
+//         range              = maxAxisValue - origin;
+//         direction          = 1;
+//     }
 
-    float   percent    = (float)distanceFromOrigin / range;
-    int16_t coordinate = (int16_t)(percent * 100);
-    if (coordinate < 0) {
-        return 0;
-    } else if (coordinate > 100) {
-        return 100 * direction;
-    } else {
-        return coordinate * direction;
-    }
-}
+//     float   percent    = (float)distanceFromOrigin / range;
+//     int16_t coordinate = (int16_t)(percent * 100);
+//     if (coordinate < 0) {
+//         return 0;
+//     } else if (coordinate > 100) {
+//         return 100 * direction;
+//     } else {
+//         return coordinate * direction;
+//     }
+// }
 
-int8_t axisToMouseComponent(uint8_t pin, int16_t origin, uint8_t maxSpeed, int8_t polarity) {
-    int coordinate = axisCoordinate(pin, origin);
-    if (coordinate != 0) {
-        float percent = (float)coordinate / 100;
-        if (get_mods() & MOD_BIT(KC_LSFT)) {
-            return percent * precisionSpeed * polarity * (abs(coordinate) / speedRegulator);
-        } else {
-            return percent * maxCursorSpeed * polarity * (abs(coordinate) / speedRegulator);
-        }
-    } else {
-        return 0;
-    }
-}
+// int8_t axisToMouseComponent(uint8_t pin, int16_t origin, uint8_t maxSpeed, int8_t polarity) {
+//     int coordinate = axisCoordinate(pin, origin);
+//     if (coordinate != 0) {
+//         float percent = (float)coordinate / 100;
+//         if (get_mods() & MOD_BIT(KC_LSFT)) {
+//             return percent * precisionSpeed * polarity * (abs(coordinate) / speedRegulator);
+//         } else {
+//             return percent * maxCursorSpeed * polarity * (abs(coordinate) / speedRegulator);
+//         }
+//     } else {
+//         return 0;
+//     }
+// }
 
-void pointing_device_init(void) {
-    // init pin? Is needed?
-    // setPinInputHigh(E6);
-    // Account for drift
-    xOrigin = analogReadPin(F4);
-    yOrigin = analogReadPin(B6);
-}
+// void pointing_device_init(void) {
+//     // init pin? Is needed?
+//     // setPinInputHigh(E6);
+//     // Account for drift
+//     xOrigin = analogReadPin(MCP_X_AXIS);
+//     yOrigin = analogReadPin(MCP_Y_AXIS);
+// }
 
-void pointing_device_task(void) {
-    report_mouse_t report = pointing_device_get_report();
+// void pointing_device_task(void) {
+//     report_mouse_t report = pointing_device_get_report();
 
-    // todo read as one vector
-    if (timer_elapsed(lastCursor) > cursorTimeout) {
-        lastCursor = timer_read();
-        report.x   = axisToMouseComponent(F4, xOrigin, maxCursorSpeed, xPolarity);
-        report.y   = axisToMouseComponent(B6, yOrigin, maxCursorSpeed, yPolarity);
-    }
+//     // todo read as one vector
+//     if (timer_elapsed(lastCursor) > cursorTimeout) {
+//         lastCursor = timer_read();
+//         report.x   = axisToMouseComponent(MCP_X_AXIS, xOrigin, maxCursorSpeed, xPolarity);
+//         report.y   = axisToMouseComponent(MCP_Y_AXIS, yOrigin, maxCursorSpeed, yPolarity);
+//     }
 
-    //
-/*
-    if (!readPin(E6)) {
-        report.buttons |= MOUSE_BTN1;
-    } else {
-        report.buttons &= ~MOUSE_BTN1;
-    }
-*/
+//     //
+// /*
+//     if (!readPin(E6)) {
+//         report.buttons |= MOUSE_BTN1;
+//     } else {
+//         report.buttons &= ~MOUSE_BTN1;
+//     }
+// */
 
-    pointing_device_set_report(report);
-    pointing_device_send();
-}
-#endif
+//     pointing_device_set_report(report);
+//     pointing_device_send();
+// }
+// #endif
 
 #ifdef OLED_ENABLE
 #include <stdio.h>
@@ -176,11 +192,15 @@ bool oled_task_user(void) {
     oledState = 3;
 
     // Host Keyboard Layer Status
+    oled_write_P(PSTR("DIE! HAHAHA!!!\n"), false);
     oled_write_P(PSTR("Layer: "), false);
 
     switch (get_highest_layer(layer_state)) {
         case _BASE:
-            oled_write_P(PSTR("Batman\n"), false);
+            oled_write_P(PSTR("Base\n"), false);
+            break;
+        case _SECONDARY:
+            oled_write_P(PSTR("Secondary\n"), false);
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string
@@ -204,20 +224,34 @@ bool oled_task_user(void) {
 }
 #endif
 
-// void keyboard_post_init_user(void) {
+void keyboard_post_init_user(void) {
 //   // Customise these values to desired behaviour
-//   debug_enable=true;
-//   debug_matrix=true;
-// //   debug_keyboard=true;
+  debug_enable=true;
+  debug_matrix=true;
+  debug_keyboard=true;
 //   //debug_mouse=true;
-// }
+}
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* First encoder */
-        if (clockwise) {
+    // if (index == 0) { /* First encoder */
+
+    if(clockwise) {
+        if(get_mods() & MOD_MASK_GUI) {
+            tap_code(KC_TAB);
+        } else if(IS_LAYER_ON(0)) {
             tap_code_delay(KC_VOLU, 10);
-        } else {
+        } else if(IS_LAYER_ON(1)) {
+            tap_code_delay(KC_WH_U, 10);
+        }
+    } else {
+        if(get_mods() & MOD_MASK_GUI) {
+            register_mods(MOD_BIT(KC_LSFT));
+            tap_code(KC_TAB);
+            unregister_mods(MOD_BIT(KC_LSFT));
+        } else if(IS_LAYER_ON(0)) {
             tap_code_delay(KC_VOLD, 10);
+        } else if(IS_LAYER_ON(1)) {
+            tap_code_delay(KC_WH_D, 10);
         }
     }
 
